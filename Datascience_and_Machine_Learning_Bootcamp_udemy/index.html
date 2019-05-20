@@ -1,0 +1,57 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onClick="sendMsg()">Student</button>
+    <button onClick="sendTeacherMsg()">Teacher</button>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script>
+      const socket = io("https://dev.socket.guardianschoolsoftware.com");
+
+      function sendMsg() {
+        var data = {
+          "student_id": "21750214-6f68-4b6a-8061-7fa1ff61b0b4",
+          "schedule_id": "af65ecbc-688e-4747-a149-2a99314d2953",
+          "is_active": false
+        }        
+        socket.emit("student_connect", data);
+      }
+
+      function sendTeacherMsg() {
+        var data = {
+          "teacher_id": "21750214-6f68-4b6a-8061-7fa1ff61b0b4",
+          "schedule_id": "af65ecbc-688e-4747-a149-2a99314d2953",
+          "is_active": false
+        }            
+        socket.emit("teacher_connect", data);
+      }
+
+      socket.on("student_connect", function(data) {
+        var data = {
+          "student_id": "21750214-6f68-4b6a-8061-7fa1ff61b0b4",
+          "schedule_id": "af65ecbc-688e-4747-a149-2a99314d2953",
+          "is_active": false
+        }    
+        console.log("Data in Student Connect "+data);
+      });
+
+      socket.on("teacher_connect", function(data) {
+        var data = {
+          "teacher_id": "21750214-6f68-4b6a-8061-7fa1ff61b0b4",
+          "schedule_id": "684dba90-3efd-4e98-97b2-9be0b04c70a7",
+          "is_active": false
+        }        
+        console.log("Data in Teacher Connect:-  "+data);
+      });      
+
+    </script>
+  </body>
+</html>
